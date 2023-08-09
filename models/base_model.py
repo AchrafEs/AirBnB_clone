@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """ This module is composed of BaseModel class."""
-from datetime.datetime import now
-import uuid import uuid4
+import datetime
+import uuid
 
 
 class BaseModel:
     """ Defines all common attributes/methods for other classes."""
 
-    def __init__(self, id=str(uuid4()),
-                 created_at=now(),
-                 updated_at=now()):
+    def __init__(self, id=str(uuid.uuid4()),
+                 created_at=datetime.datetime.now(),
+                 updated_at=datetime.datetime.now()):
         """ Initializes a BaseModel object.
 
             Params:
@@ -30,7 +30,7 @@ class BaseModel:
     def save(self):
         """ updates the public instance attribute updated_at
             with the current datetime."""
-        self.updated_at = now()
+        self.updated_at = datetime.datetime.now()
 
     def to_dict(self):
         """ returns a dictionary containing all
