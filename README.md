@@ -17,8 +17,6 @@ By creating the console, we can interact and test the basic elements and functio
 user@ubuntu:~/AirBnB_dir$ ./console.py
 ```
 
----
-
 ### How to use
 
 ```bash
