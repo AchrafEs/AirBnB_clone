@@ -59,11 +59,14 @@ class FileStorage():
         """
         from models.base_model import BaseModel
 
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as file:
-                s_obj = json.load(file)
+        try:
+            with open(FileStorage.__file_path, mode='r') as my_file:
+                new_dict = json.load(my_file)
 
-                for key, val in s_obj.items():
-                    class_name, obj_id = key.split('.')
-                    if class_name == "BaseModel":
-                        self.new(BaseModel(**val))
+            for key, value in new_dict.items():
+                class_name = value.get('__class__')
+                obj = eval(class_name + '(**value)')
+                FileStorage.__objects[key] = obj
+
+        except FileNotFoundError:
+            pass
