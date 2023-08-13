@@ -31,5 +31,10 @@ class FileStorage:
         """ Deserializes the JSON file to __objects."""
 
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r') as f:
-                FileStorage.__objects = json.load(f)
+            try:
+                with open(FileStorage.__file_path, 'r') as f:
+                    FileStorage.__objects = json.load(f)
+            except Exception with e:
+                print("Error loading JSON file:", str(e))
+        else:
+            print("JSON file does not exist.")
