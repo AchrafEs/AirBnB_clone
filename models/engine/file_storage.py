@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """file_storage.py module"""
 import json
+import os
 
 # from models.user import User
 # from models.amenity import Amenity
@@ -58,14 +59,11 @@ class FileStorage():
         """
         from models.base_model import BaseModel
 
-        try:
-            with open(FileStorage.__file_path, mode='r') as my_file:
-                new_dict = json.load(my_file)
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, 'r') as file:
+                s_obj = json.load(file)
 
-            for key, value in new_dict.items():
-                class_name = value.get('__class__')
-                obj = eval(class_name + '(**value)')
-                FileStorage.__objects[key] = obj
-
-        except FileNotFoundError:
-            pass
+                for key, val in s_obj.items():
+                    class_name, obj_id = key.split('.')
+                    if class_name == "BaseModel":
+                        self.new(BaseModel(**val))
