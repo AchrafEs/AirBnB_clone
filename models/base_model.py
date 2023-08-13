@@ -15,7 +15,7 @@ class BaseModel:
                 kwargs (dict): holds and entire object info."""
         if len(kwargs) > 0:
             for key, val in kwargs.items():
-                if kwargs == '__class__':
+                if key == '__class__':
                     continue
                 elif key == 'created_at' or key == 'updated_at':
                     self.__setattr__(key, dt.fromisoformat(val))
