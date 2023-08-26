@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """file_storage.py module"""
 import json
-from models.base_model import BaseModel
-from models.user import User
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
+import os
+
+# from models.user import User
+# from models.amenity import Amenity
+# from models.city import City
+# from models.place import Place
+# from models.review import Review
+# from models.state import State
 
 
 class FileStorage():
@@ -56,6 +57,8 @@ class FileStorage():
         public instance method that deserializes a JSON
         file to __objects.
         """
+        from models.base_model import BaseModel
+
         try:
             with open(FileStorage.__file_path, mode='r') as my_file:
                 new_dict = json.load(my_file)
